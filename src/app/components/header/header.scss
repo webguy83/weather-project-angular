@@ -1,7 +1,17 @@
+@use '../../../scss/functions' as *;
+
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  &-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h1 {
+    font-size: rem(52px);
+    text-align: center;
+    margin: rem(48px) 0;
+  }
 }
 
 .header__logo-img {
