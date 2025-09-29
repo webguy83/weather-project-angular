@@ -1,0 +1,50 @@
+// ===================================
+// WEATHER APP - SCSS FUNCTIONS
+// ===================================
+
+@use 'sass:math';
+
+/// Converts PX to REM based on 16px base
+/// @access public
+/// @param {string} $size - Value to be converted in PX.
+/// @returns {string} - Returns REM string.
+/// @example font-size: rem(24px);
+/// @returns font-size: 1.5rem;
+@function rem($size) {
+  $remSize: math.div($size, 16px);
+  @return #{$remSize}rem;
+}
+
+/// Converts PX to EM based on parent font size
+/// @access public
+/// @param {string} $size - Value to be converted in PX.
+/// @param {string} $parent-size - Parent font size (default: 16px).
+/// @returns {string} - Returns EM string.
+/// @example font-size: em(18px, 16px);
+/// @returns font-size: 1.125em;
+@function em($size, $parent-size: 16px) {
+  $emSize: math.div($size, $parent-size);
+  @return #{$emSize}em;
+}
+
+/// Fluid typography function for responsive font sizes
+/// @access public
+/// @param {string} $min-size - Minimum font size in PX.
+/// @param {string} $max-size - Maximum font size in PX.
+/// @param {string} $min-screen - Minimum screen width (default: 320px).
+/// @param {string} $max-screen - Maximum screen width (default: 1200px).
+/// @returns {string} - Returns clamp() function.
+/// @example font-size: fluid-font(16px, 24px);
+@function fluid-font($min-size, $max-size, $min-screen: 320px, $max-screen: 1200px) {
+  $min-rem: math.div($min-size, 16px);
+  $max-rem: math.div($max-size, 16px);
+  $min-vw: math.div($min-screen, 100vw) * 100;
+  $max-vw: math.div($max-screen, 100vw) * 100;
+
+  @return clamp(
+    #{$min-rem}rem,
+    #{$min-rem}rem + #{$max-rem - $min-rem} * ((100vw - #{$min-screen}) / #{$max-screen -
+          $min-screen}),
+    #{$max-rem}rem
+  );
+}

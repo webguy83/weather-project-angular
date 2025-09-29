@@ -1,0 +1,74 @@
+// ===================================
+// WEATHER APP - SCSS VARIABLES
+// ===================================
+
+@use './functions' as *;
+
+// ===================================
+// COLOR PALETTE
+// ===================================
+
+// Neutral Colors
+$neutral-900: #02012C;
+$neutral-800: #262540;
+$neutral-700: #302F4A;
+$neutral-600: #3C3B5E;
+$neutral-300: #ACACB7;
+$neutral-200: #D4D3D9;
+$neutral-0: #ffffff;
+
+// Orange Colors
+$orange-500: #FF820A;
+
+// Blue Colors
+$blue-500: #4658D9;
+$blue-700: #2B1B9C;
+
+// ===================================
+// TYPOGRAPHY
+// ===================================
+
+// Font Families (using local fonts)
+$font-primary: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+$font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Font Sizes (using rem() function for accessibility)
+$font-size-xs: rem(12px);    // 0.75rem
+$font-size-sm: rem(14px);    // 0.875rem
+$font-size-base: rem(16px);  // 1rem (browser default)
+$font-size-lg: rem(18px);    // 1.125rem
+$font-size-xl: rem(20px);    // 1.25rem
+$font-size-2xl: rem(24px);   // 1.5rem
+$font-size-3xl: rem(30px);   // 1.875rem
+$font-size-4xl: rem(36px);   // 2.25rem
+$font-size-5xl: rem(48px);   // 3rem
+$font-size-6xl: rem(64px);   // 4rem
+$font-size-7xl: rem(80px);   // 5rem
+
+// Line Heights (unitless for accessibility)
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
+
+// ===================================
+// SPACING SYSTEM (using rem function)
+// ===================================
+
+$spacing-xs: rem(4px);   // 0.25rem
+$spacing-sm: rem(8px);   // 0.5rem
+$spacing-md: rem(16px);  // 1rem
+$spacing-lg: rem(24px);  // 1.5rem
+$spacing-xl: rem(32px);  // 2rem
+$spacing-2xl: rem(40px); // 2.5rem
+$spacing-3xl: rem(48px); // 3rem
+$spacing-4xl: rem(64px); // 4rem
+$spacing-5xl: rem(80px); // 5rem
+
+

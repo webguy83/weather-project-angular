@@ -1,0 +1,112 @@
+/* ===================================
+   WEATHER APP - GLOBAL STYLES
+   =================================== */
+
+@use './scss/functions' as *;
+@use './scss/variables' as *;
+@use './scss/reset' as *;
+
+// ===================================
+// LOCAL FONT LOADING
+// ===================================
+
+// DM Sans Font Family
+@font-face {
+  font-family: 'DM Sans';
+  src: url('./assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('./assets/fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+// Bricolage Grotesque Font Family
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('./assets/fonts/Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// Fallback fonts for better browser support
+@font-face {
+  font-family: 'DM Sans';
+  src: url('./assets/fonts/DM_Sans/DMSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('./assets/fonts/DM_Sans/DMSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('./assets/fonts/Bricolage_Grotesque/BricolageGrotesque-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ===================================
+// WEATHER APP SPECIFIC STYLES
+// ===================================
+
+// Custom body styles for weather app
+body {
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  color: $neutral-0;
+  background-color: $neutral-900;
+}
+
+// Typography improvements for our design system
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-display;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+}
+
+// Custom focus styles with our brand colors
+:focus-visible {
+  outline: rem(2px) solid $blue-500;
+  outline-offset: rem(2px);
+}
+
+// ===================================
+// UTILITY CLASSES
+// ===================================
+
+.container {
+  width: 100%;
+  max-width: rem(1200px);
+  margin: 0 auto;
+  padding-inline: $spacing-md;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: rem(1px) !important;
+  height: rem(1px) !important;
+  padding: 0 !important;
+  margin: rem(-1px) !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
