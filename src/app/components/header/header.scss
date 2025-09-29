@@ -2,39 +2,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 1rem 1rem 1rem;
-  border-radius: 0 0 1rem 1rem;
 }
 
 .header__logo-img {
   height: 2.5rem;
   width: auto;
   display: block;
+  transition: all 0.3s ease;
 }
 
-.header__units {
-  display: flex;
-  align-items: center;
-}
-
-.header__units-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 0.5rem;
-  padding: 0.5rem 1.25rem;
-  font-size: 1rem;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.header__units-icon {
-  font-size: 1.25rem;
-}
-
-.header__units-caret {
-  font-size: 1rem;
-  margin-left: 0.25rem;
+.mobile-logo {
+  transform: scale(0.75);
+  transform-origin: left center;
+  transition: all 0.3s ease;
 }

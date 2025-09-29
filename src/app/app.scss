@@ -1,0 +1,6 @@
+@use '../scss/functions' as *;
+
+:host {
+  display: block;
+  padding: rem(24px);
+}

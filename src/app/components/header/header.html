@@ -1,12 +1,6 @@
 <header class="header">
   <div class="header__logo">
-  <img src="assets/images/logo.svg" alt="Weather Now logo" class="header__logo-img" />
+  <img src="assets/images/logo.svg" alt="Weather Now logo" class="header__logo-img" [class.mobile-logo]="isHandset()" />
   </div>
-  <div class="header__units">
-    <button class="header__units-btn" aria-haspopup="listbox" aria-expanded="false">
-      <span class="header__units-icon" aria-hidden="true">⚙️</span>
-      Units
-      <span class="header__units-caret" aria-hidden="true">▼</span>
-    </button>
-  </div>
+  <app-units-menu></app-units-menu>
 </header>

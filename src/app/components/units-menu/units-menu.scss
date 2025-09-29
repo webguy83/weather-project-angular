@@ -1,0 +1,64 @@
+@use '../../../scss/functions' as *;
+@use '../../../scss/variables' as *;
+
+// Custom styles for Angular Material menu
+
+.units-menu-trigger {
+  background-color: $neutral-800;
+  padding: rem(15px);
+  border-radius: rem(12px);
+  border-radius: rem(12px);
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 rem(1px) $neutral-0;
+  }
+}
+
+.units-menu-trigger-content {
+  display: flex;
+  align-items: center;
+  color: $neutral-0;
+  gap: rem(10px);
+
+}
+
+.custom-units-menu {
+  background-color: $neutral-800;
+  border: 1px solid $neutral-600;
+  border-radius: rem(12px);
+  padding: rem(6px);
+  min-width: rem(215px);
+  margin-top: rem(12px);
+}
+
+.units-menu-section-label {
+  color: $neutral-300;
+  font-size: rem(14px);
+  padding: rem(6px)
+}
+
+.units-menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $neutral-0;
+  padding: rem(10px);
+  width: 100%;
+  border-radius: rem(12px);
+
+  &.btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 rem(1px) $neutral-0;
+  }
+
+
+  &.selected {
+    background-color: $neutral-700;
+  }
+}
+
+.units-menu-divider {
+  margin: rem(6px) 0;
+  border: 1px solid $neutral-600;
+}

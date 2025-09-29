@@ -1,0 +1,55 @@
+<button
+  type="button"
+  class="units-menu-trigger"
+  [class.mobile]="isHandset()"
+  [cdkMenuTriggerFor]="menu"
+  aria-label="Open units menu"
+>
+  <div class="units-menu-trigger-content">
+    <img src="assets/images/icon-units.svg" alt="Units icon" class="units-menu-icon" />
+    <span>Units</span>
+    <img src="assets/images/icon-dropdown.svg" alt="">
+  </div>
+</button>
+<ng-template #menu>
+  <div class="custom-units-menu">
+    <button type="button" class="units-menu-item btn" cdkMenuItem>Switch to Imperial</button>
+
+    <div class="units-menu-section-label">Temperature</div>
+    <div class="units-menu-item selected">
+      <span>Celsius (°C)</span>
+      <span class="units-menu-check">
+        <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="11" />
+      </span>
+    </div>
+    <div class="units-menu-item">
+      <span>Fahrenheit (°F)</span>
+    </div>
+
+    <hr class="units-menu-divider" />
+
+    <div class="units-menu-section-label">Wind Speed</div>
+    <div class="units-menu-item selected">
+      <span>km/h</span>
+      <span class="units-menu-check">
+        <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="11" />
+      </span>
+    </div>
+    <div class="units-menu-item">
+      <span>mph</span>
+    </div>
+
+    <hr class="units-menu-divider" />
+
+    <div class="units-menu-section-label">Precipitation</div>
+    <div class="units-menu-item selected">
+      <span>Millimeters (mm)</span>
+      <span class="units-menu-check">
+        <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="11" />
+      </span>
+    </div>
+    <div class="units-menu-item">
+      <span>Inches (in)</span>
+    </div>
+  </div>
+</ng-template>
