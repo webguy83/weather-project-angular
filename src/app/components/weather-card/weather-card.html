@@ -1,1 +1,14 @@
-<p>weather-card works!</p>
+<div class="weather-card-bg" role="region" aria-label="Current weather" [class.mobile]="isMobile()">
+	<div class="weather-card-content">
+		<div class="weather-location">
+			<h2 class="weather-city">Berlin, Germany</h2>
+			<p class="weather-date">Tuesday, Aug 5, 2025</p>
+		</div>
+		<div class="weather-main-info">
+					<span class="weather-icon" aria-label="Sunny">
+						<img src="/assets/images/icon-sunny.webp" alt="Sunny weather icon" width="120" height="120" />
+					</span>
+			<span class="weather-temp">20°</span>
+		</div>
+	</div>
+</div>

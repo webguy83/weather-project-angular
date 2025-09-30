@@ -1,0 +1,69 @@
+@use '../../../scss/functions' as *;
+@use '../../../scss/variables' as *;
+
+.weather-card-bg {
+  position: relative;
+  width: 100%;
+  min-height: rem(285px);
+  border-radius: rem(20px);
+  background-image: url('/assets/images/bg-today-large.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  & h2 {
+    font-family: $font-primary;
+  }
+
+  &.mobile {
+    background-image: url('/assets/images/bg-today-small.png');
+
+    & .weather-card-content {
+      flex-direction: column;
+    }
+  }
+
+  .weather-card-content {
+    padding: rem(24px);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .weather-location {
+    display: flex;
+    flex-direction: column;
+    gap: rem(8px);
+  }
+
+  .weather-city {
+    font-size: rem(28px);
+    font-weight: 600;
+  }
+  .weather-date {
+    font-size: rem(18px);
+    font-weight: 500;
+    color: $neutral-200;
+    text-align: center;
+  }
+
+  .weather-main-info {
+    display: flex;
+  }
+  .weather-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .weather-temp {
+    font-size: rem(96px);
+    font-weight: 600;
+    font-style: italic;
+    color: $neutral-0;
+  }
+}
