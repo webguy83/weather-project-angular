@@ -5,25 +5,39 @@ import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class BreakpointService {
-  readonly isHandset;
-  readonly isTablet;
-  readonly isWeb;
+  readonly isXSmall;
+  readonly isSmall;
+  readonly isMedium;
+  readonly isLarge;
+  readonly isXLarge;
 
   constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver) {
-    this.isHandset = toSignal(
-      this.breakpointObserver.observe([Breakpoints.Handset]).pipe(
+    this.isXSmall = toSignal(
+      this.breakpointObserver.observe([Breakpoints.XSmall]).pipe(
         map((result: { matches: boolean }) => result.matches)
       ),
       { initialValue: false }
     );
-    this.isTablet = toSignal(
-      this.breakpointObserver.observe([Breakpoints.Tablet]).pipe(
+    this.isSmall = toSignal(
+      this.breakpointObserver.observe([Breakpoints.Small]).pipe(
         map((result: { matches: boolean }) => result.matches)
       ),
       { initialValue: false }
     );
-    this.isWeb = toSignal(
-      this.breakpointObserver.observe([Breakpoints.Web]).pipe(
+    this.isMedium = toSignal(
+      this.breakpointObserver.observe([Breakpoints.Medium]).pipe(
+        map((result: { matches: boolean }) => result.matches)
+      ),
+      { initialValue: false }
+    );
+    this.isLarge = toSignal(
+      this.breakpointObserver.observe([Breakpoints.Large]).pipe(
+        map((result: { matches: boolean }) => result.matches)
+      ),
+      { initialValue: false }
+    );
+    this.isXLarge = toSignal(
+      this.breakpointObserver.observe([Breakpoints.XLarge]).pipe(
         map((result: { matches: boolean }) => result.matches)
       ),
       { initialValue: false }

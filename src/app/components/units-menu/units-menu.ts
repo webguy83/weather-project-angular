@@ -10,5 +10,5 @@ import {CdkMenu, CdkMenuItem, CdkMenuTrigger} from '@angular/cdk/menu';
 })
 export class UnitsMenu {
   readonly breakpointService = inject(BreakpointService);
-  readonly isHandset = this.breakpointService.isHandset;
+  readonly isXSmall = this.breakpointService.isXSmall;
 }

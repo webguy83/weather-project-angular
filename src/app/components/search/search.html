@@ -1,1 +1,15 @@
-<p>search works!</p>
+<form class="search-form" [class.mobile]="isXSmall()">
+	<div class="search-input-wrapper">
+		<span class="search-icon">
+			<img src="../../assets/images/icon-search.svg" alt="Search" width="24" height="24" />
+		</span>
+		<input
+			type="text"
+			placeholder="Search for a place…"
+			class="search-input"
+			name="location"
+			autocomplete="off"
+		/>
+	</div>
+	<button type="submit" class="search-btn">Search</button>
+</form>

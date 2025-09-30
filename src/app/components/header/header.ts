@@ -10,5 +10,5 @@ import { UnitsMenu } from '../units-menu/units-menu';
 })
 export class Header {
   readonly breakpointService = inject(BreakpointService);
-  readonly isHandset = this.breakpointService.isHandset;
+  readonly isXSmall = this.breakpointService.isXSmall;
 }

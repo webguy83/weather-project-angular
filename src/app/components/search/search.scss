@@ -1,0 +1,56 @@
+@use '../../../scss/functions' as *;
+@use '../../../scss/variables' as *;
+
+.search-form {
+  display: flex;
+  gap: rem(16px);
+  margin: 0 auto;
+  max-width: rem(650px);
+
+  &.mobile {
+    flex-direction: column;
+
+    & .search-btn {
+      padding: rem(16px) rem(24px);
+    }
+  }
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 100%;
+  padding: rem(16px) rem(24px) rem(16px) rem(48px);
+  border: none;
+  border-radius: rem(12px);
+  background: $neutral-800;
+  color: $neutral-200;
+  font-size: rem(20px);
+  outline: none;
+}
+
+.search-btn {
+  padding: 0 rem(24px);
+  border: none;
+  border-radius: rem(12px);
+  background: $blue-500;
+  color: $neutral-0;
+  font-size: rem(20px);
+  transition: background 0.2s;
+}
+.search-btn:hover {
+  background: $blue-700;
+}
