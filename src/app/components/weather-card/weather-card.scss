@@ -24,6 +24,10 @@
     & .weather-card-content {
       flex-direction: column;
     }
+
+    & .weather-date {
+      text-align: center;
+    }
   }
 
   .weather-card-content {
@@ -49,7 +53,6 @@
     font-size: rem(18px);
     font-weight: 500;
     color: $neutral-200;
-    text-align: center;
   }
 
   .weather-main-info {
