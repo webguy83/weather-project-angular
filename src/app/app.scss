@@ -22,6 +22,9 @@
 }
 
 .weather-summary {
+  display: flex;
+  flex-direction: column;
+  gap: rem(32px);
   flex-grow: 2;
 }
 
