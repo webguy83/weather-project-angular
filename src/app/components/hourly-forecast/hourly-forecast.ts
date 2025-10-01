@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { BreakpointService } from '../../services/breakpoint.service';
 
 @Component({
   selector: 'app-hourly-forecast',
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './hourly-forecast.scss'
 })
 export class HourlyForecast {
-
+  readonly breakpointService = inject(BreakpointService);
+  readonly isMobile = this.breakpointService.isXSmall;
 }
