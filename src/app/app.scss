@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   gap: rem(32px);
+  padding-bottom: rem(32px);
   &.tablet,
   &.mobile {
     flex-direction: column;
