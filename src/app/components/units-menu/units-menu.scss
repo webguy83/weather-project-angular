@@ -9,9 +9,9 @@
   border-radius: rem(12px);
   border-radius: rem(12px);
 
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 rem(1px) $neutral-0;
+  &:focus-visible {
+    outline: 1px solid $neutral-0;
+    outline-offset: 2px;
   }
 }
 
@@ -24,6 +24,9 @@
 }
 
 .custom-units-menu {
+  display: flex;
+  flex-direction: column;
+  gap: rem(5px);
   background-color: $neutral-800;
   border: 1px solid $neutral-600;
   border-radius: rem(12px);
@@ -47,11 +50,14 @@
   width: 100%;
   border-radius: rem(12px);
 
-  &.btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 rem(1px) $neutral-0;
+  &:focus-visible {
+    outline: 1px solid $neutral-0;
+    outline-offset: 1px;
   }
 
+  &:hover:not(.selected) {
+    background-color: $neutral-700;
+  }
 
   &.selected {
     background-color: $neutral-700;

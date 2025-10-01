@@ -39,7 +39,11 @@
   background: $neutral-800;
   color: $neutral-200;
   font-size: rem(20px);
-  outline: none;
+
+  &:focus-visible {
+    outline: 1px solid $neutral-0;
+    outline-offset: 2px;
+  }
 
   &::placeholder {
     color: $neutral-200;
