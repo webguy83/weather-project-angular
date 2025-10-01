@@ -1,4 +1,4 @@
-<form class="search-form" [class.mobile]="isXSmall()">
+<form class="search-form" [class.mobile]="isXSmall()" (submit)="onSubmit($event)">
 	<div class="search-input-wrapper">
 		<span class="search-icon">
 			<img src="../../assets/images/icon-search.svg" alt="Search" width="24" height="24" />
@@ -9,7 +9,30 @@
 			class="search-input"
 			name="location"
 			autocomplete="off"
+			[value]="searchQuery()"
+			(input)="onSearchInput($event)"
+			(keydown.enter)="onEnterKey($event)"
+			[cdkMenuTriggerFor]="searchMenu"
+			#searchInput
 		/>
 	</div>
 	<button type="submit" class="search-btn">Search</button>
+	<ng-template #searchMenu>
+		@if (filteredCities().length > 0) {
+			<div class="search-autocomplete-menu" cdkMenu>
+				@for (city of filteredCities(); track city; let i = $index) {
+					<button
+						type="button"
+						class="search-autocomplete-item"
+						[class.active]="i === selectedIndex()"
+						cdkMenuItem
+						(click)="selectCity(city)"
+					>
+						{{ city }}
+					</button>
+				}
+			</div>
+		}
+	</ng-template>
 </form>
+

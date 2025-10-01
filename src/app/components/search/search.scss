@@ -62,3 +62,45 @@
 .search-btn:hover {
   background: $blue-700;
 }
+
+// Autocomplete dropdown styles
+.search-autocomplete-menu {
+  background-color: $neutral-800;
+  border: 1px solid $neutral-600;
+  border-radius: rem(8px);
+  padding: rem(8px);
+  width: 100%;
+  margin-top: rem(8px);
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+.search-autocomplete-item {
+  display: block;
+  width: 100%;
+  padding: rem(10px) rem(8px);
+  color: $neutral-0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: rem(8px);
+  text-align: left;
+  font-size: rem(16px);
+  margin-bottom: rem(4px);
+  transition: background-color 0.2s, border-color 0.2s;
+
+  &:hover {
+    background-color: $neutral-700;
+    border: 1px solid $neutral-600;
+  }
+
+  &.active {
+    background-color: $neutral-700;
+    border: 1px solid $neutral-600;
+  }
+
+  &:focus-visible {
+    outline: 1px solid $neutral-0;
+    outline-offset: 2px;
+  }
+}
