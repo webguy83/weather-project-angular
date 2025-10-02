@@ -14,16 +14,17 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-width: rem(355px);
 
   &.mobile {
     padding: rem(16px);
+    min-width: auto;
   }
 }
 .hourly-forecast-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-  gap: rem(16px);
 	margin-bottom: rem(16px);
 }
 .hourly-forecast-title {
@@ -32,13 +33,73 @@
 	font-weight: 600;
 	color: $neutral-0;
 }
-.hourly-forecast-dropdown-placeholder {
+
+.hourly-forecast-day-selector {
 	background: $neutral-700;
-	color: #e3e3f1;
-	border-radius: 0.75rem;
-	padding: 0.5rem 1.25rem;
+	color: $neutral-0;
+	border: none;
+	border-radius: rem(12px);
+	padding: rem(8px) rem(16px);
 	font-weight: 500;
+	font-size: rem(16px);
 	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: rem(8px);
+	transition: background-color 0.2s;
+
+	&:hover {
+		background: $neutral-600;
+	}
+
+	&:focus-visible {
+		outline: 1px solid $neutral-0;
+		outline-offset: 2px;
+	}
+}
+
+.hourly-forecast-day-menu {
+	background-color: $neutral-800;
+	border: 1px solid $neutral-600;
+	border-radius: rem(12px);
+	padding: rem(8px);
+	margin-top: rem(4px);
+	overflow-y: auto;
+	box-sizing: border-box;
+}
+
+.day-menu-item {
+	display: block;
+	width: 100%;
+	padding: rem(12px) rem(16px);
+	color: $neutral-0;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: rem(8px);
+	text-align: left;
+	font-size: rem(16px);
+	margin-bottom: rem(4px);
+	transition: background-color 0.2s, border-color 0.2s;
+	cursor: pointer;
+
+	&:hover {
+		background-color: $neutral-700;
+		border: 1px solid $neutral-600;
+	}
+
+	&.selected {
+		background-color: $neutral-700;
+		border: 1px solid $neutral-600;
+	}
+
+	&:focus-visible {
+		outline: 1px solid $neutral-0;
+		outline-offset: 2px;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 }
 .hourly-forecast-list {
   flex: 1 1 auto;

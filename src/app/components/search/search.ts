@@ -86,7 +86,7 @@ export class Search {
     this.menuTrigger().close();
   }
 
-  onSubmit(event: Event) {
+  onSubmit(event: SubmitEvent) {
     event.preventDefault();
     this.selectCurrentItem();
   }
@@ -107,4 +107,6 @@ export class Search {
       this.selectCity(selectedCity);
     }
   }
+
+
 }

@@ -1,8 +1,30 @@
 <section class="hourly-forecast" aria-label="Hourly forecast" [class.mobile]="isMobile()">
 	<div class="hourly-forecast-header">
 		<h3 class="hourly-forecast-title">Hourly forecast</h3>
-		<!-- Dropdown will go here later -->
-		<div class="hourly-forecast-dropdown-placeholder">Tuesday ▼</div>
+		<button
+			type="button"
+			class="hourly-forecast-day-selector"
+			[cdkMenuTriggerFor]="dayMenu"
+			aria-label="Select day for hourly forecast"
+		>
+			<span>{{ selectedDay() }}</span>
+			<img src="assets/images/icon-dropdown.svg" alt="" />
+		</button>
+		<ng-template #dayMenu>
+			<div class="hourly-forecast-day-menu" cdkMenu>
+				@for (day of days; track day) {
+					<button
+						type="button"
+						class="day-menu-item"
+						[class.selected]="day === selectedDay()"
+						cdkMenuItem
+						(click)="selectDay(day)"
+					>
+						{{ day }}
+					</button>
+				}
+			</div>
+		</ng-template>
 	</div>
 	<ul class="hourly-forecast-list">
 		<li class="hourly-forecast-item">
