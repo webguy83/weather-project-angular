@@ -1,7 +1,8 @@
-import { Component, inject, viewChild, signal } from '@angular/core';
+import { Component, inject, viewChild, signal, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { BreakpointService } from '../../services/breakpoint.service';
+import { CitySearchService, CityResult } from '../../services/city-search.service';
 
 @Component({
   selector: 'app-search',
@@ -11,77 +12,46 @@ import { BreakpointService } from '../../services/breakpoint.service';
 })
 export class Search {
   readonly breakpointService = inject(BreakpointService);
+  readonly citySearchService = inject(CitySearchService);
   readonly isXSmall = this.breakpointService.isXSmall;
 
   readonly menuTrigger = viewChild.required(CdkMenuTrigger);
 
   searchQuery = signal('');
-  filteredCities = signal<string[]>([]);
-  selectedIndex = signal(0); // Auto-active first option
+  selectedIndex = signal(0);
 
-  // Dummy city data
-  readonly cities = [
-    'New York',
-    'Los Angeles',
-    'Chicago',
-    'Houston',
-    'Phoenix',
-    'Philadelphia',
-    'San Antonio',
-    'San Diego',
-    'Dallas',
-    'San Jose',
-    'Austin',
-    'Jacksonville',
-    'Fort Worth',
-    'Columbus',
-    'Charlotte',
-    'San Francisco',
-    'Indianapolis',
-    'Seattle',
-    'Denver',
-    'Washington',
-    'Boston',
-    'Nashville',
-    'Oklahoma City',
-    'Las Vegas',
-    'Portland',
-    'Memphis',
-    'Louisville',
-    'Baltimore',
-    'Milwaukee',
-    'Albuquerque'
-  ];
+  readonly searchResults = this.citySearchService.searchResults;
+
+  readonly shouldShowMenu = computed(() => {
+    const query = this.citySearchService.searchQuery();
+    const status = this.searchResults.status();
+    const isLoading = status === 'loading';
+    const results = this.searchResults.value() || [];
+    
+    console.log('Status:', status, 'Query:', query, 'Results:', results);
+    
+    return query.length > 0 && (isLoading || results.length > 0);
+  });
 
   onSearchInput(event: Event) {
     const target = event.target as HTMLInputElement;
-    const query = target.value.toLowerCase().trim();
-    this.searchQuery.set(target.value);
+    const query = target.value.trim();
+    this.searchQuery.set(query);
 
-    if (query.length > 0) {
-      const filtered = this.cities
-        .filter(city => city.toLowerCase().includes(query))
-        .slice(0, 5); // Limit to 5 results
+    this.citySearchService.updateSearchQuery(query);
+    this.selectedIndex.set(0);
 
-      this.filteredCities.set(filtered);
-      this.selectedIndex.set(0); // Auto-active first option
-
-      // Only open menu if there are filtered results
-      if (filtered.length > 0) {
-        this.menuTrigger().open();
-      } else {
-        this.menuTrigger().close();
-      }
-    } else {
-      this.filteredCities.set([]);
-      this.selectedIndex.set(0);
+    if (query.length === 0) {
       this.menuTrigger().close();
+    } else if (query.length >= 2) {
+      this.menuTrigger().open();
     }
   }
 
-  selectCity(city: string) {
-    this.searchQuery.set(city);
-    this.filteredCities.set([]);
+  selectCity(city: CityResult) {
+    const displayName = this.citySearchService.formatCityName(city);
+    this.searchQuery.set(displayName);
+    this.citySearchService.updateSearchQuery('');
     this.selectedIndex.set(0);
     this.menuTrigger().close();
   }
@@ -93,13 +63,13 @@ export class Search {
 
   onEnterKey(event: Event) {
     event.preventDefault();
-    if (this.filteredCities().length > 0) {
+    if ((this.searchResults.value() || []).length > 0) {
       this.selectCurrentItem();
     }
   }
 
   private selectCurrentItem() {
-    const cities = this.filteredCities();
+    const cities = this.searchResults.value() || [];
     const currentIndex = this.selectedIndex();
 
     if (cities.length > 0 && currentIndex >= 0 && currentIndex < cities.length) {

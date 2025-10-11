@@ -1,38 +1,50 @@
 <form class="search-form" [class.mobile]="isXSmall()" (submit)="onSubmit($event)">
-	<div class="search-input-wrapper">
-		<span class="search-icon">
-			<img src="../../assets/images/icon-search.svg" alt="Search" width="24" height="24" />
-		</span>
-		<input
-			type="text"
-			placeholder="Search for a place…"
-			class="search-input"
-			name="location"
-			autocomplete="off"
-			[value]="searchQuery()"
-			(input)="onSearchInput($event)"
-			(keydown.enter)="onEnterKey($event)"
-			[cdkMenuTriggerFor]="searchMenu"
-			#searchInput
-		/>
-	</div>
-	<button type="submit" class="search-btn">Search</button>
-	<ng-template #searchMenu>
-		@if (filteredCities().length > 0) {
-			<div class="search-autocomplete-menu" cdkMenu>
-				@for (city of filteredCities(); track city; let i = $index) {
-					<button
-						type="button"
-						class="search-autocomplete-item"
-						[class.active]="i === selectedIndex()"
-						cdkMenuItem
-						(click)="selectCity(city)"
-					>
-						{{ city }}
-					</button>
-				}
-			</div>
-		}
-	</ng-template>
+  <div class="search-input-wrapper">
+    <span class="search-icon">
+      <img src="../../assets/images/icon-search.svg" alt="Search" width="24" height="24" />
+    </span>
+    <input
+      type="text"
+      placeholder="Search for a place…"
+      class="search-input"
+      name="location"
+      autocomplete="off"
+      [value]="searchQuery()"
+      (input)="onSearchInput($event)"
+      (keydown.enter)="onEnterKey($event)"
+      [cdkMenuTriggerFor]="searchMenu"
+      #searchInput
+    />
+  </div>
+  <button type="submit" class="search-btn">Search</button>
+  <ng-template #searchMenu>
+    @if (shouldShowMenu()) {
+    <div class="search-autocomplete-menu" cdkMenu>
+      @if (searchResults.status() === 'loading') {
+      <div class="search-autocomplete-item search-loading-item" role="status" aria-live="polite">
+        <img
+          src="../../assets/images/icon-loading.svg"
+          alt=""
+          width="16"
+          height="16"
+          class="loading-spinner"
+          aria-hidden="true"
+        />
+        <span>Search in progress</span>
+      </div>
+      } @else { @for (city of (searchResults.value() || []); track city.name + city.country +
+      city.lat + city.lon; let i = $index) {
+      <button
+        type="button"
+        class="search-autocomplete-item"
+        [class.active]="i === selectedIndex()"
+        cdkMenuItem
+        (click)="selectCity(city)"
+      >
+        {{ citySearchService.formatCityName(city) }}
+      </button>
+      } }
+    </div>
+    }
+  </ng-template>
 </form>
-
