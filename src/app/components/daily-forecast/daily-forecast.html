@@ -3,9 +3,6 @@
   <ul class="daily-forecast-list">
     @for (day of dailyForecast(); track $index) {
     <li class="daily-forecast-item" [class.loading]="isLoading()">
-      @if (isLoading()) {
-      <!-- Empty content for loading state with pulse background -->
-      } @else {
       <span class="forecast-day">{{ day.day }}</span>
       <img
         [src]="day.icon"
@@ -19,7 +16,6 @@
         <span class="forecast-high">{{ day.high }}°</span>
         <span class="forecast-low">{{ day.low }}°</span>
       </div>
-      }
     </li>
     }
   </ul>
