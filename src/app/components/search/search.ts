@@ -54,8 +54,6 @@ export class Search {
     this.selectedIndex = 0;
     this.menuTrigger().close();
 
-    // Fetch weather data for the selected city
-    console.log('🏙️ Selected city:', city);
     this.weatherService.updateWeatherForLocation(city.lat, city.lon, displayName);
   }
 

@@ -1,20 +1,14 @@
 <section class="weather-stats" aria-label="Weather statistics">
   <ul class="weather-stats-list" [class.mobile]="isMobile()">
-    <li class="weather-stat">
-      <span class="stat-label">Feels Like</span>
-      <span class="stat-value">64°</span>
+    @for (stat of weatherStats(); track stat.label) {
+    <li class="weather-stat" [class.loading]="isLoading()">
+      <span class="stat-label">{{ stat.label }}</span>
+      @if (isLoading()) {
+      <span class="stat-value">--</span>
+      } @else {
+      <span class="stat-value">{{ stat.value }}</span>
+      }
     </li>
-    <li class="weather-stat">
-      <span class="stat-label">Humidity</span>
-      <span class="stat-value">46%</span>
-    </li>
-    <li class="weather-stat">
-      <span class="stat-label">Wind</span>
-      <span class="stat-value">9 mph</span>
-    </li>
-    <li class="weather-stat">
-      <span class="stat-label">Precipitation</span>
-      <span class="stat-value">0 in</span>
-    </li>
+    }
   </ul>
 </section>

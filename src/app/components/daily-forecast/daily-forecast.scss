@@ -1,16 +1,18 @@
 
 @use '../../../scss/functions' as *;
 @use '../../../scss/variables' as *;
+@use '../../../scss/animations' as *;
 
-.daily-forecast-title {
-	font-size: rem(20px);
-	font-weight: 600;
-	color: $neutral-0;
-	margin-bottom: rem(20px);
-  font-family: $font-primary;
-}
+.daily-forecast {
+	&-title {
+		font-size: rem(20px);
+		font-weight: 600;
+		color: $neutral-0;
+		margin-bottom: rem(20px);
+		font-family: $font-primary;
+	}
 
-	.daily-forecast-list {
+	&-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(rem(100px), 1fr));
 		gap: rem(16px);
@@ -20,34 +22,46 @@
 		width: 100%;
 	}
 
-.daily-forecast-item {
-	background: $neutral-800;
-  border: 1px solid $neutral-600;
-	border-radius: 1rem;
-	padding: rem(16px) rem(12px);
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-  gap: rem(16px);
+	&-item {
+		background: $neutral-800;
+		border: 1px solid $neutral-600;
+		border-radius: rem(16px);
+		padding: rem(16px) rem(12px);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: rem(16px);
+		min-height: rem(140px);
+
+		&.loading {
+			background: $neutral-600;
+			animation: pulse 2s ease-in-out infinite;
+		}
+	}
 }
 
-.forecast-temps {
-  display: flex;
-  justify-content: space-between;
-  gap: rem(20px);
-  width: 100%;
-}
-.forecast-day {
-	font-size: rem(18px);
-	color: $neutral-200;
-}
-.forecast-high {
-	font-size: rem(16px);
-	font-weight: 500;
-	color: $neutral-0;
-}
-.forecast-low {
-	font-size: rem(16px);
-	color: $neutral-200;
+.forecast {
+	&-temps {
+		display: flex;
+		justify-content: space-between;
+		gap: rem(20px);
+		width: 100%;
+	}
+
+	&-day {
+		font-size: rem(18px);
+		color: $neutral-200;
+	}
+
+	&-high {
+		font-size: rem(16px);
+		font-weight: 500;
+		color: $neutral-0;
+	}
+
+	&-low {
+		font-size: rem(16px);
+		color: $neutral-200;
+	}
 }

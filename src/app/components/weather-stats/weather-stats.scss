@@ -1,32 +1,43 @@
 @use '../../../scss/functions' as *;
 @use '../../../scss/variables' as *;
+@use '../../../scss/animations' as *;
 
-.weather-stats-list {
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(rem(140px), 1fr));
-	gap: rem(20px);
-	list-style: none;
-	padding: 0;
-	margin: 0;
+.weather-stats {
+	&-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(rem(140px), 1fr));
+		gap: rem(20px);
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
 }
 
 .weather-stat {
-  border: 1px solid $neutral-600;
+	border: 1px solid $neutral-600;
 	background: $neutral-800;
-	border-radius: 1rem;
+	border-radius: rem(12px);
 	padding: rem(20px);
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	justify-content: center;
+
+	&.loading {
+		animation: pulse 2s ease-in-out infinite;
+	}
 }
-.stat-label {
-	font-size: rem(18px);
-	color: $neutral-200;
-	margin-bottom: 0.5rem;
-}
-.stat-value {
-	font-size: rem(32px);
-	color: $neutral-0;
-  font-weight: 300;
+
+.stat {
+	&-label {
+		font-size: rem(18px);
+		color: $neutral-200;
+		margin-bottom: rem(8px);
+	}
+
+	&-value {
+		font-size: rem(32px);
+		color: $neutral-0;
+		font-weight: 300;
+	}
 }

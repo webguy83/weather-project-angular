@@ -2,6 +2,9 @@ import { Injectable, signal, computed, resource } from '@angular/core';
 
 export interface CurrentWeather {
   temperature: number;
+  apparentTemperature: number;
+  humidity: number;
+  precipitation: number;
   windSpeed: number;
   windDirection: number;
   weatherCode: number;
@@ -55,6 +58,7 @@ interface OpenMeteoWeatherResponse {
     interval: number;
     temperature_2m: number;
     relative_humidity_2m: number;
+    apparent_temperature: number;
     is_day: number;
     precipitation: number;
     weather_code: number;
@@ -97,16 +101,16 @@ export class WeatherService {
   readonly weatherResource = resource({
     params: () => this.selectedLocation(),
     loader: async ({ params }) => {
-      if (!params) return null;
-
-      console.log(`🌤️ Fetching weather for ${params.name} (${params.lat}, ${params.lon})`);
-
+      if (!params) {
+        return null;
+      }
       const urlParams = new URLSearchParams({
         latitude: params.lat.toString(),
         longitude: params.lon.toString(),
         current: [
           'temperature_2m',
           'relative_humidity_2m',
+          'apparent_temperature',
           'is_day',
           'precipitation',
           'weather_code',
@@ -141,30 +145,8 @@ export class WeatherService {
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-
         const data = await response.json() as OpenMeteoWeatherResponse;
-        const weatherData = this.transformResponse(data);
-
-        console.log('🌡️ Weather Data Received:', {
-          location: params.name,
-          coordinates: { lat: params.lat, lon: params.lon },
-          current: {
-            temperature: weatherData.current.temperature,
-            weatherCode: weatherData.current.weatherCode,
-            windSpeed: weatherData.current.windSpeed,
-            isDay: weatherData.current.isDay
-          },
-          hourly: {
-            nextHours: weatherData.hourly.temperature2m.slice(0, 6),
-            times: weatherData.hourly.time.slice(0, 6)
-          },
-          daily: {
-            temperatures: weatherData.daily.temperature2mMax.slice(0, 3),
-            dates: weatherData.daily.time.slice(0, 3)
-          }
-        });
-
-        return weatherData;
+        return  this.transformResponse(data);
       } catch (error) {
         console.error('Error fetching weather data from Open-Meteo:', error);
         throw error;
@@ -185,6 +167,9 @@ export class WeatherService {
       elevation: response.elevation,
       current: {
         temperature: response.current.temperature_2m,
+        apparentTemperature: response.current.apparent_temperature,
+        humidity: response.current.relative_humidity_2m,
+        precipitation: response.current.precipitation,
         windSpeed: response.current.wind_speed_10m,
         windDirection: response.current.wind_direction_10m,
         weatherCode: response.current.weather_code,
@@ -215,5 +200,56 @@ export class WeatherService {
 
   clearWeatherData() {
     this.selectedLocation.set(null);
+  }
+
+  getWeatherIcon(code: number, isDay: boolean): { filename: string; description: string } {
+    const timeOfDay = isDay ? 'day' : 'night';
+
+    switch (code) {
+      case 0:
+        return {
+          filename: isDay ? 'sunny' : 'partly-cloudy',
+          description: isDay ? 'Clear sky' : 'Clear night'
+        };
+      case 1:
+      case 2:
+        return { filename: 'partly-cloudy', description: `Partly cloudy ${timeOfDay}` };
+      case 3:
+        return { filename: 'overcast', description: 'Overcast' };
+      case 45:
+      case 48:
+        return { filename: 'fog', description: 'Foggy' };
+      case 51:
+      case 53:
+      case 55:
+      case 56:
+      case 57:
+        return { filename: 'drizzle', description: 'Drizzle' };
+      case 61:
+      case 63:
+      case 65:
+      case 66:
+      case 67:
+      case 80:
+      case 81:
+      case 82:
+        return { filename: 'rain', description: 'Rain' };
+      case 71:
+      case 73:
+      case 75:
+      case 77:
+      case 85:
+      case 86:
+        return { filename: 'snow', description: 'Snow' };
+      case 95:
+      case 96:
+      case 99:
+        return { filename: 'storm', description: 'Thunderstorm' };
+      default:
+        return {
+          filename: isDay ? 'sunny' : 'partly-cloudy',
+          description: isDay ? 'Clear' : 'Clear night'
+        };
+    }
   }
 }

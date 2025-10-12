@@ -1,103 +1,26 @@
 <section class="daily-forecast" aria-label="Daily forecast">
   <h3 class="daily-forecast-title">Daily forecast</h3>
   <ul class="daily-forecast-list">
-    <li class="daily-forecast-item">
-      <span class="forecast-day">Tue</span>
+    @for (day of dailyForecast(); track $index) {
+    <li class="daily-forecast-item" [class.loading]="isLoading()">
+      @if (isLoading()) {
+      <!-- Empty content for loading state with pulse background -->
+      } @else {
+      <span class="forecast-day">{{ day.day }}</span>
       <img
-        src="/assets/images/icon-rain.webp"
-        alt="Rain"
+        [src]="day.icon"
+        alt="weather icon"
+        [title]="day.alt"
         class="forecast-icon"
         width="60"
         height="60"
       />
       <div class="forecast-temps">
-        <span class="forecast-high">68°</span>
-        <span class="forecast-low">57°</span>
+        <span class="forecast-high">{{ day.high }}°</span>
+        <span class="forecast-low">{{ day.low }}°</span>
       </div>
+      }
     </li>
-    <li class="daily-forecast-item">
-      <span class="forecast-day">Wed</span>
-      <img
-        src="/assets/images/icon-drizzle.webp"
-        alt="Drizzle"
-        class="forecast-icon"
-        width="60"
-        height="60"
-      />
-      <div class="forecast-temps">
-        <span class="forecast-high">70°</span>
-        <span class="forecast-low">59°</span>
-      </div>
-    </li>
-    <li class="daily-forecast-item">
-      <span class="forecast-day">Thu</span>
-      <img
-        src="/assets/images/icon-sunny.webp"
-        alt="Sunny"
-        class="forecast-icon"
-        width="60"
-        height="60"
-      />
-      <div class="forecast-temps">
-        <span class="forecast-high">75°</span>
-        <span class="forecast-low">57°</span>
-      </div>
-    </li>
-    <li class="daily-forecast-item">
-      <span class="forecast-day">Fri</span>
-      <img
-        src="/assets/images/icon-partly-cloudy.webp"
-        alt="Partly cloudy"
-        class="forecast-icon"
-        width="60"
-        height="60"
-      />
-      <div class="forecast-temps">
-        <span class="forecast-high">77°</span>
-        <span class="forecast-low">55°</span>
-      </div>
-    </li>
-    <li class="daily-forecast-item">
-      <span class="forecast-day">Sat</span>
-      <img
-        src="/assets/images/icon-storm.webp"
-        alt="Storm"
-        class="forecast-icon"
-        width="60"
-        height="60"
-      />
-      <div class="forecast-temps">
-        <span class="forecast-high">70°</span>
-        <span class="forecast-low">59°</span>
-      </div>
-    </li>
-    <li class="daily-forecast-item">
-      <span class="forecast-day">Sun</span>
-      <img
-        src="/assets/images/icon-snow.webp"
-        alt="Snow"
-        class="forecast-icon"
-        width="60"
-        height="60"
-      />
-      <div class="forecast-temps">
-        <span class="forecast-high">77°</span>
-        <span class="forecast-low">61°</span>
-      </div>
-    </li>
-    <li class="daily-forecast-item">
-      <span class="forecast-day">Mon</span>
-      <img
-        src="/assets/images/icon-fog.webp"
-        alt="Fog"
-        class="forecast-icon"
-        width="60"
-        height="60"
-      />
-      <div class="forecast-temps">
-        <span class="forecast-high">75°</span>
-        <span class="forecast-low">59°</span>
-      </div>
-    </li>
+    }
   </ul>
 </section>
