@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { CitySearchService, CityResult } from '../../services/city-search.service';
+import { WeatherService } from '../../services/weather.service';
 
 @Component({
   selector: 'app-search',
@@ -13,12 +14,13 @@ import { CitySearchService, CityResult } from '../../services/city-search.servic
 export class Search {
   readonly breakpointService = inject(BreakpointService);
   readonly citySearchService = inject(CitySearchService);
+  readonly weatherService = inject(WeatherService);
   readonly isXSmall = this.breakpointService.isXSmall;
 
   readonly menuTrigger = viewChild.required(CdkMenuTrigger);
 
   searchQuery = signal('');
-  selectedIndex = signal(0);
+  selectedIndex = 0;
 
   readonly searchResults = this.citySearchService.searchResults;
 
@@ -27,9 +29,6 @@ export class Search {
     const status = this.searchResults.status();
     const isLoading = status === 'loading';
     const results = this.searchResults.value() || [];
-    
-    console.log('Status:', status, 'Query:', query, 'Results:', results);
-    
     return query.length > 0 && (isLoading || results.length > 0);
   });
 
@@ -39,7 +38,7 @@ export class Search {
     this.searchQuery.set(query);
 
     this.citySearchService.updateSearchQuery(query);
-    this.selectedIndex.set(0);
+    this.selectedIndex = 0;
 
     if (query.length === 0) {
       this.menuTrigger().close();
@@ -52,8 +51,12 @@ export class Search {
     const displayName = this.citySearchService.formatCityName(city);
     this.searchQuery.set(displayName);
     this.citySearchService.updateSearchQuery('');
-    this.selectedIndex.set(0);
+    this.selectedIndex = 0;
     this.menuTrigger().close();
+
+    // Fetch weather data for the selected city
+    console.log('🏙️ Selected city:', city);
+    this.weatherService.updateWeatherForLocation(city.lat, city.lon, displayName);
   }
 
   onSubmit(event: SubmitEvent) {
@@ -70,13 +73,11 @@ export class Search {
 
   private selectCurrentItem() {
     const cities = this.searchResults.value() || [];
-    const currentIndex = this.selectedIndex();
+    const currentIndex = this.selectedIndex;
 
     if (cities.length > 0 && currentIndex >= 0 && currentIndex < cities.length) {
       const selectedCity = cities[currentIndex];
       this.selectCity(selectedCity);
     }
   }
-
-
 }

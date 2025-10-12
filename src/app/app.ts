@@ -7,6 +7,7 @@ import { WeatherStats } from './components/weather-stats/weather-stats';
 import { DailyForecast } from './components/daily-forecast/daily-forecast';
 import { HourlyForecast } from './components/hourly-forecast/hourly-forecast';
 import { BreakpointService } from './services/breakpoint.service';
+import { WeatherService } from './services/weather.service';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,9 @@ import { BreakpointService } from './services/breakpoint.service';
 })
 export class App {
   readonly breakpointService = inject(BreakpointService);
+  readonly weatherService = inject(WeatherService);
+  
   readonly isMobile = this.breakpointService.isXSmall;
   readonly isTablet = this.breakpointService.isSmall;
+  readonly hasWeatherData = this.weatherService.hasSelectedLocation;
 }

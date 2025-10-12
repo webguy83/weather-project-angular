@@ -2,13 +2,16 @@
   <app-header></app-header>
   <app-search></app-search>
 </header>
-<main class="main-content" [class.mobile]="isMobile()" [class.tablet]="isTablet()">
-  <section class="weather-summary">
-    <app-weather-card></app-weather-card>
-    <app-weather-stats></app-weather-stats>
-    <app-daily-forecast></app-daily-forecast>
-  </section>
-  <aside class="weather-hourly">
-     <app-hourly-forecast></app-hourly-forecast>
-  </aside>
-</main>
+
+@if (hasWeatherData()) {
+  <main class="main-content" [class.mobile]="isMobile()" [class.tablet]="isTablet()">
+    <section class="weather-summary">
+      <app-weather-card></app-weather-card>
+      <app-weather-stats></app-weather-stats>
+      <app-daily-forecast></app-daily-forecast>
+    </section>
+    <aside class="weather-hourly">
+       <app-hourly-forecast></app-hourly-forecast>
+    </aside>
+  </main>
+}

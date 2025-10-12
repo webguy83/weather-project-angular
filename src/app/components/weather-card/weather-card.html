@@ -1,14 +1,40 @@
-<div class="weather-card-bg" role="region" aria-label="Current weather" [class.mobile]="isMobile()">
-	<div class="weather-card-content">
-		<div class="weather-location">
-			<h2 class="weather-city">Berlin, Germany</h2>
-			<p class="weather-date">Tuesday, Aug 5, 2025</p>
-		</div>
-		<div class="weather-main-info">
-					<span class="weather-icon" aria-label="Sunny">
-						<img src="/assets/images/icon-sunny.webp" alt="Sunny weather icon" width="120" height="120" />
-					</span>
-			<span class="weather-temp">20°</span>
-		</div>
-	</div>
+<div
+  class="weather-card-bg"
+  role="region"
+  aria-label="Current weather"
+  [class.mobile]="isMobile()"
+  [class.loading]="isLoading()"
+>
+  @if (isLoading()) {
+  <div class="weather-loading">
+    <div class="loading-spinner">
+      <img
+        src="/assets/images/icon-loading.svg"
+        alt="Loading weather data"
+        width="130"
+        height="130"
+      />
+      <p class="loading-text">Loading...</p>
+    </div>
+  </div>
+  } @else {
+  <div class="weather-card-content">
+    <div class="weather-location">
+      <h2 class="weather-city">{{ cityName() }}</h2>
+      <p class="weather-date">{{ weatherDate() | date : 'EEEE, MMM d, y' }}</p>
+    </div>
+    <div class="weather-main-info">
+      <span class="weather-icon" [attr.aria-label]="weatherIcon().description">
+        <img
+          [src]="'/assets/images/icon-' + weatherIcon().filename + '.webp'"
+          alt="Weather condition icon"
+          [title]="weatherIcon().description"
+          width="120"
+          height="120"
+        />
+      </span>
+      <span class="weather-temp">{{ temperature() }}°</span>
+    </div>
+  </div>
+  }
 </div>
