@@ -1,71 +1,45 @@
 <section class="hourly-forecast" aria-label="Hourly forecast" [class.mobile]="isMobile()">
-	<div class="hourly-forecast-header">
-		<h3 class="hourly-forecast-title">Hourly forecast</h3>
-		<button
-			type="button"
-			class="hourly-forecast-day-selector"
-			[cdkMenuTriggerFor]="dayMenu"
-			aria-label="Select day for hourly forecast"
-		>
-			<span>{{ selectedDay() }}</span>
-			<img src="assets/images/icon-dropdown.svg" alt="" />
-		</button>
-		<ng-template #dayMenu>
-			<div class="hourly-forecast-day-menu" cdkMenu>
-				@for (day of days; track day) {
-					<button
-						type="button"
-						class="day-menu-item"
-						[class.selected]="day === selectedDay()"
-						cdkMenuItem
-						(click)="selectDay(day)"
-					>
-						{{ day }}
-					</button>
-				}
-			</div>
-		</ng-template>
-	</div>
-	<ul class="hourly-forecast-list">
-		<li class="hourly-forecast-item">
-			<img src="/assets/images/icon-partly-cloudy.webp" alt="Partly Cloudy" class="hourly-icon" width="40" height="40" />
-			<span class="hourly-time">3 PM</span>
-			<span class="hourly-temp">68°</span>
-		</li>
-		<li class="hourly-forecast-item">
-			<img src="/assets/images/icon-partly-cloudy.webp" alt="Partly Cloudy" class="hourly-icon" width="40" height="40" />
-			<span class="hourly-time">4 PM</span>
-			<span class="hourly-temp">68°</span>
-		</li>
-		<li class="hourly-forecast-item">
-			<img src="/assets/images/icon-sunny.webp" alt="Sunny" class="hourly-icon" width="40" height="40" />
-			<span class="hourly-time">5 PM</span>
-			<span class="hourly-temp">68°</span>
-		</li>
-		<li class="hourly-forecast-item">
-			<img src="/assets/images/icon-partly-cloudy.webp" alt="Partly Cloudy" class="hourly-icon" width="40" height="40" />
-			<span class="hourly-time">6 PM</span>
-			<span class="hourly-temp">66°</span>
-		</li>
-		<li class="hourly-forecast-item">
-			<img src="/assets/images/icon-rain.webp" alt="Rain" class="hourly-icon" width="40" height="40" />
-			<span class="hourly-time">7 PM</span>
-			<span class="hourly-temp">66°</span>
-		</li>
-		<li class="hourly-forecast-item">
-			<img src="/assets/images/icon-fog.webp" alt="Fog" class="hourly-icon" width="40" height="40" />
-			<span class="hourly-time">8 PM</span>
-			<span class="hourly-temp">64°</span>
-		</li>
-		<li class="hourly-forecast-item">
-			<img src="/assets/images/icon-rain.webp" alt="Rain" class="hourly-icon" width="40" height="40" />
-			<span class="hourly-time">9 PM</span>
-			<span class="hourly-temp">63°</span>
-		</li>
-		<li class="hourly-forecast-item">
-			<img src="/assets/images/icon-rain.webp" alt="Rain" class="hourly-icon" width="40" height="40" />
-			<span class="hourly-time">10 PM</span>
-			<span class="hourly-temp">63°</span>
-		</li>
-	</ul>
+  <div class="hourly-forecast-header">
+    <h3 class="hourly-forecast-title">Hourly forecast</h3>
+    <button
+      type="button"
+      class="hourly-forecast-day-selector"
+      [cdkMenuTriggerFor]="dayMenu"
+      aria-label="Select day for hourly forecast"
+    >
+      <span>{{ selectedDay() }}</span>
+      <img src="assets/images/icon-dropdown.svg" alt="" />
+    </button>
+    <ng-template #dayMenu>
+      <div class="hourly-forecast-day-menu" cdkMenu>
+        @for (day of days(); track day) {
+        <button
+          type="button"
+          class="day-menu-item"
+          [class.selected]="day === selectedDay()"
+          cdkMenuItem
+          (click)="onSelectDay(day || '--')"
+        >
+          {{ day }}
+        </button>
+        }
+      </div>
+    </ng-template>
+  </div>
+  <ul class="hourly-forecast-list">
+    @for (hour of hourlyForecast(); track $index) {
+    <li class="hourly-forecast-item" [class.loading]="isLoading()">
+      <img
+        [src]="hour.icon"
+        alt="{{ hour.alt }}"
+        title="{{ hour.alt }}"
+        class="hourly-icon"
+        width="40"
+        height="40"
+      />
+      <span class="hourly-time">{{ hour.time }}</span>
+      <span class="hourly-temp">{{ hour.temperature }}°</span>
+    </li>
+    }
+  </ul>
 </section>

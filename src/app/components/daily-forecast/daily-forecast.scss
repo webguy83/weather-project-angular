@@ -37,6 +37,11 @@
 		&.loading {
 			background: $neutral-600;
 			animation: pulse 2s ease-in-out infinite;
+
+      .forecast-temps, .forecast-icon, .forecast-day {
+        visibility: hidden;
+      }
+
 		}
 	}
 }

@@ -1,6 +1,7 @@
 
 @use '../../../scss/functions' as *;
 @use '../../../scss/variables' as *;
+@use '../../../scss/animations' as *;
 
 :host {
   display: block;
@@ -121,6 +122,14 @@
 	justify-content: space-between;
 	gap: 1rem;
 	flex: 1 1 0;
+
+	&.loading {
+		animation: pulse 2s ease-in-out infinite;
+
+    > img, span {
+      visibility: hidden;
+    }
+	}
 }
 
 .hourly-time {

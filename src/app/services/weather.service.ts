@@ -15,11 +15,7 @@ export interface CurrentWeather {
 export interface HourlyWeather {
   time: string[];
   temperature2m: number[];
-  relativeHumidity2m: number[];
-  precipitationProbability: number[];
   weatherCode: number[];
-  windSpeed10m: number[];
-  windDirection10m: number[];
 }
 
 export interface DailyWeather {
@@ -27,10 +23,8 @@ export interface DailyWeather {
   weatherCode: number[];
   temperature2mMax: number[];
   temperature2mMin: number[];
-  precipitationSum: number[];
-  precipitationProbabilityMax: number[];
-  windSpeed10mMax: number[];
-  windDirection10mDominant: number[];
+  sunrise: string[];
+  sunset: string[];
 }
 
 export interface WeatherData {
@@ -85,6 +79,8 @@ interface OpenMeteoWeatherResponse {
     precipitation_probability_max: number[];
     wind_speed_10m_max: number[];
     wind_direction_10m_dominant: number[];
+    sunrise: string[];
+    sunset: string[];
   };
 }
 
@@ -132,7 +128,9 @@ export class WeatherService {
           'precipitation_sum',
           'precipitation_probability_max',
           'wind_speed_10m_max',
-          'wind_direction_10m_dominant'
+          'wind_direction_10m_dominant',
+          'sunrise',
+          'sunset'
         ].join(','),
         timezone: 'auto',
         forecast_days: '7'
@@ -179,21 +177,15 @@ export class WeatherService {
       hourly: {
         time: response.hourly.time,
         temperature2m: response.hourly.temperature_2m,
-        relativeHumidity2m: response.hourly.relative_humidity_2m,
-        precipitationProbability: response.hourly.precipitation_probability,
         weatherCode: response.hourly.weather_code,
-        windSpeed10m: response.hourly.wind_speed_10m,
-        windDirection10m: response.hourly.wind_direction_10m
       },
       daily: {
         time: response.daily.time,
         weatherCode: response.daily.weather_code,
         temperature2mMax: response.daily.temperature_2m_max,
         temperature2mMin: response.daily.temperature_2m_min,
-        precipitationSum: response.daily.precipitation_sum,
-        precipitationProbabilityMax: response.daily.precipitation_probability_max,
-        windSpeed10mMax: response.daily.wind_speed_10m_max,
-        windDirection10mDominant: response.daily.wind_direction_10m_dominant
+        sunrise: response.daily.sunrise,
+        sunset: response.daily.sunset,
       }
     };
   }
@@ -208,12 +200,15 @@ export class WeatherService {
     switch (code) {
       case 0:
         return {
-          filename: isDay ? 'sunny' : 'partly-cloudy',
+          filename: isDay ? 'sunny' : 'clear-night',
           description: isDay ? 'Clear sky' : 'Clear night'
         };
       case 1:
       case 2:
-        return { filename: 'partly-cloudy', description: `Partly cloudy ${timeOfDay}` };
+        return {
+          filename: isDay ? 'partly-cloudy' : 'partly-cloudy-night',
+          description: `Partly cloudy ${timeOfDay}`
+        };
       case 3:
         return { filename: 'overcast', description: 'Overcast' };
       case 45:
@@ -247,7 +242,7 @@ export class WeatherService {
         return { filename: 'storm', description: 'Thunderstorm' };
       default:
         return {
-          filename: isDay ? 'sunny' : 'partly-cloudy',
+          filename: isDay ? 'sunny' : 'clear-night',
           description: isDay ? 'Clear' : 'Clear night'
         };
     }
