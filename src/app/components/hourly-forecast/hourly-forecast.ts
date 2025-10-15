@@ -44,7 +44,7 @@ export class HourlyForecast {
     const data = this.weatherData();
     const userSelection = this.userSelectedDay();
 
-    if (userSelection !== '--' || !data?.current) {
+    if (userSelection !== '--' || !data?.current || this.isLoading()) {
       return userSelection;
     }
 
