@@ -45,7 +45,7 @@ export class WeatherStats {
       },
       {
         label: 'Wind',
-        value: `${Math.round(current.windSpeed)} m/s`
+        value: `${Math.round(current.windSpeed)} km/h`
       },
       {
         label: 'Precipitation',
