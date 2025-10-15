@@ -29,8 +29,8 @@
           [src]="'/assets/images/icon-' + weatherIcon().filename + '.webp'"
           alt="Weather condition icon"
           [title]="weatherIcon().description"
-          width="120"
-          height="120"
+          [width]="weatherIcon().filename === 'partly-cloudy-night' || weatherIcon().filename === 'clear-night' ? 80 : 120"
+          [height]="weatherIcon().filename === 'partly-cloudy-night' || weatherIcon().filename === 'clear-night' ? 80 : 120"
         />
       </span>
       <span class="weather-temp">{{ temperature() }}°</span>

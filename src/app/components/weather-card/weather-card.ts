@@ -2,6 +2,7 @@ import { Component, inject, computed } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { WeatherService } from '../../services/weather.service';
+import { UnitsService } from '../../services/units.service';
 
 @Component({
   selector: 'app-weather-card',
@@ -12,6 +13,7 @@ import { WeatherService } from '../../services/weather.service';
 export class WeatherCard {
   readonly breakpointService = inject(BreakpointService);
   readonly weatherService = inject(WeatherService);
+  readonly unitsService = inject(UnitsService);
 
   readonly isMobile = this.breakpointService.isXSmall;
 
@@ -30,7 +32,7 @@ export class WeatherCard {
 
   readonly temperature = computed(() => {
     const weather = this.weatherData.value();
-    return weather?.current.temperature ? Math.round(weather.current.temperature) : null;
+    return weather?.current.temperature ? Math.round(this.unitsService.convertTemperature(weather.current.temperature)) : null;
   });
 
   readonly isLoading = computed(() => {

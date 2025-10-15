@@ -1,6 +1,7 @@
 import { Component, inject, computed } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { WeatherService } from '../../services/weather.service';
+import { UnitsService } from '../../services/units.service';
 
 interface DailyForecastItem {
   day: string;
@@ -18,6 +19,7 @@ interface DailyForecastItem {
 })
 export class DailyForecast {
   readonly weatherService = inject(WeatherService);
+  readonly unitsService = inject(UnitsService);
   private readonly datePipe = inject(DatePipe);
 
   readonly weatherData = this.weatherService.weatherResource.value;
@@ -47,8 +49,8 @@ export class DailyForecast {
         day: dayName,
         icon: `/assets/images/icon-${iconData.filename}.webp`,
         alt: iconData.description,
-        high: Math.round(daily.temperature2mMax[index]),
-        low: Math.round(daily.temperature2mMin[index])
+        high: Math.round(this.unitsService.convertTemperature(daily.temperature2mMax[index])),
+        low: Math.round(this.unitsService.convertTemperature(daily.temperature2mMin[index]))
       };
     });
   });

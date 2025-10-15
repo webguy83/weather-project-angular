@@ -3,6 +3,7 @@ import { DatePipe } from '@angular/common';
 import { CdkMenuModule } from '@angular/cdk/menu';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { DailyWeather, WeatherService } from '../../services/weather.service';
+import { UnitsService } from '../../services/units.service';
 
 interface HourlyForecastItem {
   time: string;
@@ -32,6 +33,7 @@ type HourlyDataByDay = Map<string, {
 export class HourlyForecast {
   readonly breakpointService = inject(BreakpointService);
   readonly weatherService = inject(WeatherService);
+  readonly unitsService = inject(UnitsService);
   private readonly datePipe = inject(DatePipe);
 
   readonly isMobile = this.breakpointService.isXSmall;
@@ -83,8 +85,8 @@ export class HourlyForecast {
 
     return dayData.map(item => ({
       time: this.datePipe.transform(item.time, 'h:mm a') || '',
-      temperature: item.temperature,
-      icon: `/assets/images/icon-${item.weatherIcon.filename}.webp`,
+      temperature: Math.round(this.unitsService.convertTemperature(item.temperature)),
+      icon: item.weatherIcon.filename,
       alt: item.weatherIcon.description
     }));
   });

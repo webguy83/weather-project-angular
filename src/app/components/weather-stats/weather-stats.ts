@@ -1,6 +1,7 @@
 import { Component, inject, computed, signal } from '@angular/core';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { WeatherService } from '../../services/weather.service';
+import { UnitsService } from '../../services/units.service';
 
 interface WeatherStat {
   label: string;
@@ -16,6 +17,7 @@ interface WeatherStat {
 export class WeatherStats {
   readonly breakpointService = inject(BreakpointService);
   readonly weatherService = inject(WeatherService);
+  readonly unitsService = inject(UnitsService);
   readonly isMobile = this.breakpointService.isXSmall;
 
   readonly weatherData = this.weatherService.weatherResource.value;
@@ -37,7 +39,7 @@ export class WeatherStats {
     return [
       {
         label: 'Feels Like',
-        value: `${Math.round(current.apparentTemperature)}°`
+        value: this.unitsService.formatTemperature(current.apparentTemperature)
       },
       {
         label: 'Humidity',
@@ -45,11 +47,11 @@ export class WeatherStats {
       },
       {
         label: 'Wind',
-        value: `${Math.round(current.windSpeed)} km/h`
+        value: this.unitsService.formatWindSpeed(current.windSpeed)
       },
       {
         label: 'Precipitation',
-        value: current.precipitation ? `${current.precipitation.toFixed(1)} mm` : '0 mm'
+        value: this.unitsService.formatPrecipitation(current.precipitation || 0)
       }
     ];
   });
