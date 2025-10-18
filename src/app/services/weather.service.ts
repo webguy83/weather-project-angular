@@ -93,6 +93,7 @@ export class WeatherService {
   readonly selectedLocation = signal<{ lat: number; lon: number; name: string } | null>(null);
   readonly hasSelectedLocation = computed(() => this.selectedLocation() !== null);
   readonly currentLocation = computed(() => this.selectedLocation());
+  readonly noResultsFound = signal(false);
 
   readonly weatherResource = resource({
     params: () => this.selectedLocation(),
@@ -155,6 +156,11 @@ export class WeatherService {
   updateWeatherForLocation(lat: number, lon: number, locationName: string) {
     this.selectedLocation.set({ lat, lon, name: locationName });
   }
+
+  updatedNoResultsFound(value: boolean) {
+    this.noResultsFound.set(value);
+  }
+
 
   private transformResponse(response: OpenMeteoWeatherResponse): WeatherData {
     return {

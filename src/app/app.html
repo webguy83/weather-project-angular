@@ -3,7 +3,7 @@
   <app-search></app-search>
 </header>
 
-@if (hasWeatherData()) {
+@if (hasWeatherData() && !noResultsFound()) {
   <main class="main-content" [class.mobile]="isMobile()" [class.tablet]="isTablet()">
     <section class="weather-summary">
       <app-weather-card></app-weather-card>

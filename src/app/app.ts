@@ -19,7 +19,8 @@ import { WeatherService } from './services/weather.service';
 export class App {
   readonly breakpointService = inject(BreakpointService);
   readonly weatherService = inject(WeatherService);
-  
+  readonly noResultsFound = this.weatherService.noResultsFound;
+
   readonly isMobile = this.breakpointService.isXSmall;
   readonly isTablet = this.breakpointService.isSmall;
   readonly hasWeatherData = this.weatherService.hasSelectedLocation;

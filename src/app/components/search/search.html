@@ -48,3 +48,8 @@
     }
   </ng-template>
 </form>
+@if (noResultsFound()) {
+<div class="no-results">
+  <p>No search result found!</p>
+</div>
+}

@@ -122,3 +122,10 @@
 .loading-spinner {
   animation: spin 1s linear infinite;
 }
+
+.no-results {
+  font-size: rem(28px);
+  font-weight: 700;
+  text-align: center;
+  margin-top: rem(48px);
+}

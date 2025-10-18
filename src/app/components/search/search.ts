@@ -23,6 +23,7 @@ export class Search {
   selectedIndex = 0;
 
   readonly searchResults = this.citySearchService.searchResults;
+  readonly noResultsFound = this.weatherService.noResultsFound;
 
   readonly shouldShowMenu = computed(() => {
     const query = this.citySearchService.searchQuery();
@@ -47,14 +48,18 @@ export class Search {
     }
   }
 
-  selectCity(city: CityResult) {
-    const displayName = this.citySearchService.formatCityName(city);
-    this.searchQuery.set(displayName);
+  selectCity(city: CityResult | null) {
+    if (city) {
+      const displayName = this.citySearchService.formatCityName(city);
+      this.searchQuery.set(displayName);
+      this.weatherService.updateWeatherForLocation(city.lat, city.lon, displayName);
+      this.weatherService.updatedNoResultsFound(false);
+    } else {
+      this.weatherService.updatedNoResultsFound(true);
+    }
     this.citySearchService.updateSearchQuery('');
     this.selectedIndex = 0;
     this.menuTrigger().close();
-
-    this.weatherService.updateWeatherForLocation(city.lat, city.lon, displayName);
   }
 
   onSubmit(event: SubmitEvent) {
@@ -66,6 +71,8 @@ export class Search {
     event.preventDefault();
     if ((this.searchResults.value() || []).length > 0) {
       this.selectCurrentItem();
+    } else {
+      this.selectCity(null);
     }
   }
 
@@ -76,6 +83,8 @@ export class Search {
     if (cities.length > 0 && currentIndex >= 0 && currentIndex < cities.length) {
       const selectedCity = cities[currentIndex];
       this.selectCity(selectedCity);
+    } else {
+      this.selectCity(null);
     }
   }
 }
