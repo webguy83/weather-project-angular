@@ -40,14 +40,11 @@ export class HourlyForecast {
   readonly weatherData = this.weatherService.weatherResource.value;
   readonly isLoading = this.weatherService.weatherResource.isLoading;
 
-  private readonly userSelectedDay = signal<string>('--');
-
-  readonly selectedDay = computed(() => {
+  readonly selectedDay = linkedSignal(() => {
     const data = this.weatherData();
-    const userSelection = this.userSelectedDay();
 
-    if (userSelection !== '--' || !data?.current || this.isLoading()) {
-      return userSelection;
+    if (!data?.current) {
+      return '--';
     }
 
     return this.datePipe.transform(data.current.time, 'EEEE');
@@ -92,7 +89,7 @@ export class HourlyForecast {
   });
 
   onSelectDay(day: string) {
-    this.userSelectedDay.set(day);
+    this.selectedDay.set(day);
   }
 
   private roundDownToHour(dateStr: string) {
