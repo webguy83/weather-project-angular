@@ -10,7 +10,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px;
 }
 
 .error-content {
@@ -19,25 +18,18 @@
   align-items: center;
   text-align: center;
   max-width: rem(600px);
-}
-
-.error-icon {
-  margin-bottom: 32px;
+  gap: rem(24px);
 }
 
 .error-title {
   font-family: 'Bricolage Grotesque', sans-serif;
   font-size: rem(52px);
   font-weight: 700;
-  margin-bottom: 16px;
-  line-height: 1.2;
 }
 
 .error-message {
   font-size: rem(20px);
   color: $neutral-200;
-  line-height: 1.6;
-  margin-bottom: 32px;
 }
 
 .error-retry-btn {
