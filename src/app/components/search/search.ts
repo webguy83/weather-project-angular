@@ -1,4 +1,4 @@
-import { Component, inject, viewChild, signal, computed } from '@angular/core';
+import { Component, inject, viewChild, computed } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CdkMenuModule, CdkMenuTrigger } from '@angular/cdk/menu';
 import { BreakpointService } from '../../services/breakpoint.service';
@@ -19,14 +19,14 @@ export class Search {
 
   readonly menuTrigger = viewChild.required(CdkMenuTrigger);
 
-  searchQuery = signal('');
+  searchQuery = this.citySearchService.searchQuery;
   selectedIndex = 0;
 
   readonly searchResults = this.citySearchService.searchResults;
   readonly noResultsFound = this.weatherService.noResultsFound;
 
   readonly shouldShowMenu = computed(() => {
-    const query = this.citySearchService.searchQuery();
+    const query = this.searchQuery();
     const status = this.searchResults.status();
     const isLoading = status === 'loading';
     const results = this.searchResults.value() || [];
@@ -36,7 +36,6 @@ export class Search {
   onSearchInput(event: Event) {
     const target = event.target as HTMLInputElement;
     const query = target.value.trim();
-    this.searchQuery.set(query);
 
     this.citySearchService.updateSearchQuery(query);
     this.selectedIndex = 0;
@@ -51,13 +50,12 @@ export class Search {
   selectCity(city: CityResult | null) {
     if (city) {
       const displayName = this.citySearchService.formatCityName(city);
-      this.searchQuery.set(displayName);
+      this.citySearchService.updateSearchQuery(displayName);
       this.weatherService.updateWeatherForLocation(city.lat, city.lon, displayName);
       this.weatherService.updatedNoResultsFound(false);
     } else {
       this.weatherService.updatedNoResultsFound(true);
     }
-    this.citySearchService.updateSearchQuery('');
     this.selectedIndex = 0;
     this.menuTrigger().close();
   }

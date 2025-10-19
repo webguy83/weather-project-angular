@@ -6,19 +6,23 @@ import { Observable, debounceTime, distinctUntilChanged, switchMap, catchError, 
 export interface CityResult {
   name: string;
   country: string;
+  country_code: string;
   state?: string;
   lat: number;
   lon: number;
+  population?: number;
 }
 
 interface OpenMeteoGeoResult {
   name: string;
   latitude: number;
   longitude: number;
+  country: string;
   country_code: string;
   admin1?: string;
   admin2?: string;
   timezone: string;
+  population: number;
 }
 
 interface OpenMeteoGeoResponse {
@@ -53,21 +57,56 @@ export class CitySearchService {
       return of([]);
     }
 
-    const url = `${this.BASE_URL}?name=${encodeURIComponent(query)}&count=10&language=en&format=json`;
+    const tokens = query.split(',').map((s) => s.trim()).filter(Boolean);
+    const city = tokens[0];
+    const restOfDataPoints = tokens.slice(1).map((t) => t.toLowerCase());
+
+    const lookup = restOfDataPoints.reduce((acc, token) => {
+      acc[token] = true;
+      return acc;
+    }, {} as Record<string, boolean>);
+
+    const url = `${this.BASE_URL}?name=${encodeURIComponent(city)}&count=10&language=en&format=json`;
 
     return this.http.get<OpenMeteoGeoResponse>(url).pipe(
       switchMap(response => {
+        console.log('Open-Meteo Geo Response:', response);
+
         if (!response.results || response.results.length === 0) {
           return of([]);
         }
 
         const cities: CityResult[] = response.results.map(result => ({
           name: result.name,
-          country: result.country_code,
+          country: result.country,
+          country_code: result.country_code,
           state: result.admin1 || undefined,
           lat: result.latitude,
-          lon: result.longitude
-        }));
+          lon: result.longitude,
+          population: result.population || 0
+        })).filter(c => {
+          const state = c.state?.toLowerCase() || '';
+          const country = c.country?.toLowerCase() || '';
+          const country_code = c.country_code?.toLowerCase() || '';
+
+          return Object.keys(lookup).every(token =>
+            state.includes(token) ||
+            country.includes(token) ||
+            country_code.includes(token)
+          );
+        });
+
+        const queryCity = city.toLowerCase();
+
+        cities.sort((a, b) => {
+          const aExact = a.name.toLowerCase() === queryCity;
+          const bExact = b.name.toLowerCase() === queryCity;
+
+          if (aExact && !bExact) return -1;
+          if (bExact && !aExact) return 1;
+
+          return (b.population || 0) - (a.population || 0);
+        });
 
         return of(cities);
       }),
