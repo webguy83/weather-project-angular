@@ -3,10 +3,9 @@
   class="units-menu-trigger"
   [class.mobile]="isXSmall()"
   [cdkMenuTriggerFor]="menu"
-  aria-label="Open units menu"
 >
   <span class="units-menu-trigger-content">
-    <img src="assets/images/icon-units.svg" alt="Units icon" class="units-menu-icon" />
+    <img src="assets/images/icon-units.svg" alt="" class="units-menu-icon" />
     <span>Units</span>
     <img src="assets/images/icon-dropdown.svg" alt="" />
   </span>
@@ -25,31 +24,31 @@
     }
 
     <div class="units-menu-section-label">Temperature</div>
-    <button 
-      type="button" 
-      class="units-menu-item" 
+    <button
+      type="button"
+      class="units-menu-item"
       [class.selected]="currentUnits().temperature === 'celsius'"
-      cdkMenuItem 
+      cdkMenuItem
       (click)="onTemperatureUnitChange('celsius')"
     >
       <span>Celsius (°C)</span>
       @if (currentUnits().temperature === 'celsius') {
         <span class="units-menu-check">
-          <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="17" />
+          <img src="assets/images/icon-checkmark.svg" alt="" width="14" height="17" />
         </span>
       }
     </button>
-    <button 
-      type="button" 
-      class="units-menu-item" 
+    <button
+      type="button"
+      class="units-menu-item"
       [class.selected]="currentUnits().temperature === 'fahrenheit'"
-      cdkMenuItem 
+      cdkMenuItem
       (click)="onTemperatureUnitChange('fahrenheit')"
     >
       <span>Fahrenheit (°F)</span>
       @if (currentUnits().temperature === 'fahrenheit') {
         <span class="units-menu-check">
-          <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="17" />
+          <img src="assets/images/icon-checkmark.svg" alt="" width="14" height="17" />
         </span>
       }
     </button>
@@ -57,31 +56,31 @@
     <hr class="units-menu-divider" />
 
     <div class="units-menu-section-label">Wind Speed</div>
-    <button 
-      type="button" 
-      class="units-menu-item" 
+    <button
+      type="button"
+      class="units-menu-item"
       [class.selected]="currentUnits().windSpeed === 'kmh'"
-      cdkMenuItem 
+      cdkMenuItem
       (click)="onWindSpeedUnitChange('kmh')"
     >
       <span>km/h</span>
       @if (currentUnits().windSpeed === 'kmh') {
         <span class="units-menu-check">
-          <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="17" />
+          <img src="assets/images/icon-checkmark.svg" alt="" width="14" height="17" />
         </span>
       }
     </button>
-    <button 
-      type="button" 
-      class="units-menu-item" 
+    <button
+      type="button"
+      class="units-menu-item"
       [class.selected]="currentUnits().windSpeed === 'mph'"
-      cdkMenuItem 
+      cdkMenuItem
       (click)="onWindSpeedUnitChange('mph')"
     >
       <span>mph</span>
       @if (currentUnits().windSpeed === 'mph') {
         <span class="units-menu-check">
-          <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="17" />
+          <img src="assets/images/icon-checkmark.svg" alt="" width="14" height="17" />
         </span>
       }
     </button>
@@ -89,31 +88,31 @@
     <hr class="units-menu-divider" />
 
     <div class="units-menu-section-label">Precipitation</div>
-    <button 
-      type="button" 
-      class="units-menu-item" 
+    <button
+      type="button"
+      class="units-menu-item"
       [class.selected]="currentUnits().precipitation === 'mm'"
-      cdkMenuItem 
+      cdkMenuItem
       (click)="onPrecipitationUnitChange('mm')"
     >
       <span>Millimeters (mm)</span>
       @if (currentUnits().precipitation === 'mm') {
         <span class="units-menu-check">
-          <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="17" />
+          <img src="assets/images/icon-checkmark.svg" alt="" width="14" height="17" />
         </span>
       }
     </button>
-    <button 
-      type="button" 
-      class="units-menu-item" 
+    <button
+      type="button"
+      class="units-menu-item"
       [class.selected]="currentUnits().precipitation === 'in'"
-      cdkMenuItem 
+      cdkMenuItem
       (click)="onPrecipitationUnitChange('in')"
     >
       <span>Inches (in)</span>
       @if (currentUnits().precipitation === 'in') {
         <span class="units-menu-check">
-          <img src="assets/images/icon-checkmark.svg" alt="Selected" width="14" height="17" />
+          <img src="assets/images/icon-checkmark.svg" alt="" width="14" height="17" />
         </span>
       }
     </button>

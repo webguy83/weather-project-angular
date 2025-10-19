@@ -1,11 +1,10 @@
-<section class="hourly-forecast" aria-label="Hourly forecast" [class.mobile]="isMobile()">
+<section class="hourly-forecast" [class.mobile]="isMobile()">
   <div class="hourly-forecast-header">
     <h3 class="hourly-forecast-title">Hourly forecast</h3>
     <button
       type="button"
       class="hourly-forecast-day-selector"
       [cdkMenuTriggerFor]="dayMenu"
-      aria-label="Select day for hourly forecast"
     >
       <span>{{ selectedDay() }}</span>
       <img src="assets/images/icon-dropdown.svg" alt="" />
