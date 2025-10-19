@@ -1,0 +1,57 @@
+@use 'sass:color';
+@use '../../../scss/functions' as *;
+@use '../../../scss/variables' as *;
+
+:host {
+  flex: auto;
+}
+
+.error-state {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: rem(600px);
+}
+
+.error-icon {
+  margin-bottom: 32px;
+}
+
+.error-title {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: rem(52px);
+  font-weight: 700;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.error-message {
+  font-size: rem(20px);
+  color: $neutral-200;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.error-retry-btn {
+  display: flex;
+  align-items: center;
+  gap: rem(10px);
+  padding: rem(12px) rem(16px);
+  background-color: $neutral-800;
+  color: $neutral-0;
+  border-radius: rem(8px);
+  font-weight: 600;
+  transition: background 0.2s;
+
+  &:hover {
+    background-color: color.scale($neutral-800, $lightness: 10%);
+  }
+}

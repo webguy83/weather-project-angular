@@ -1,17 +1,21 @@
 <header>
-  <app-header></app-header>
+  <app-header [hasError]="hasError()"></app-header>
+  @if (!hasError()) {
   <app-search></app-search>
+  }
 </header>
 
-@if (hasWeatherData() && !noResultsFound()) {
-  <main class="main-content" [class.mobile]="isMobile()" [class.tablet]="isTablet()">
-    <section class="weather-summary">
-      <app-weather-card></app-weather-card>
-      <app-weather-stats></app-weather-stats>
-      <app-daily-forecast></app-daily-forecast>
-    </section>
-    <aside class="weather-hourly">
-       <app-hourly-forecast></app-hourly-forecast>
-    </aside>
-  </main>
+@if (hasError()) {
+<app-error-state (retry)="onRetry()"></app-error-state>
+} @else if (hasWeatherData() && !noResultsFound()) {
+<main class="main-content" [class.mobile]="isMobile()" [class.tablet]="isTablet()">
+  <section class="weather-summary">
+    <app-weather-card></app-weather-card>
+    <app-weather-stats></app-weather-stats>
+    <app-daily-forecast></app-daily-forecast>
+  </section>
+  <aside class="weather-hourly">
+    <app-hourly-forecast></app-hourly-forecast>
+  </aside>
+</main>
 }

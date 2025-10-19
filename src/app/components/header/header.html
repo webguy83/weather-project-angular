@@ -5,5 +5,7 @@
   </div>
   <app-units-menu></app-units-menu>
   </div>
-  <h1>How’s the sky looking today?</h1>
+  @if (!hasError()) {
+    <h1>How's the sky looking today?</h1>
+  }
 </div>

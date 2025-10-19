@@ -71,11 +71,8 @@ export class CitySearchService {
         const sortedCities = this.sortCitiesByRelevance(cities, city);
 
         return of(sortedCities);
-      }),
-      catchError(error => {
-        console.error('Error fetching cities from Open-Meteo:', error);
-        return of([]);
       })
+      // Remove catchError to let errors propagate to the UI
     );
   }
 

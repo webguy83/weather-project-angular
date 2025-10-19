@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { UnitsMenu } from '../units-menu/units-menu';
 
@@ -11,4 +11,5 @@ import { UnitsMenu } from '../units-menu/units-menu';
 export class Header {
   readonly breakpointService = inject(BreakpointService);
   readonly isXSmall = this.breakpointService.isXSmall;
+  readonly hasError = input(false);
 }
