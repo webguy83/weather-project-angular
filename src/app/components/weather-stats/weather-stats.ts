@@ -1,4 +1,4 @@
-import { Component, inject, computed, signal } from '@angular/core';
+import { Component, inject, computed, signal, AnimationCallbackEvent } from '@angular/core';
 import { BreakpointService } from '../../services/breakpoint.service';
 import { WeatherService } from '../../services/weather.service';
 import { UnitsService } from '../../services/units.service';

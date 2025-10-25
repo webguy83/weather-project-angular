@@ -1,4 +1,5 @@
 @use '../scss/functions' as *;
+@use '../scss/animations' as *;
 
 :host {
   display: flex;
@@ -27,4 +28,16 @@
   flex-direction: column;
   gap: rem(32px);
   width: 100%;
+}
+
+.enter-animation {
+  animation: slide-fade-in .3s;
+}
+
+.exit-animation {
+  animation: slide-fade-out .3s;
+}
+
+.app-header {
+  animation: slide-fade-in .3s;
 }

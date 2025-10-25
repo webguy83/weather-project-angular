@@ -1,11 +1,7 @@
 <section class="hourly-forecast" [class.mobile]="isMobile()">
   <div class="hourly-forecast-header">
     <h3 class="hourly-forecast-title">Hourly forecast</h3>
-    <button
-      type="button"
-      class="hourly-forecast-day-selector"
-      [cdkMenuTriggerFor]="dayMenu"
-    >
+    <button type="button" class="hourly-forecast-day-selector" [cdkMenuTriggerFor]="dayMenu">
       <span>{{ selectedDay() }}</span>
       <img src="assets/images/icon-dropdown.svg" alt="" />
     </button>
@@ -27,7 +23,7 @@
   </div>
   <ul class="hourly-forecast-list">
     @for (hour of hourlyForecast(); track $index) {
-    <li class="hourly-forecast-item" [class.loading]="isLoading()">
+    <li class="hourly-forecast-item" [class.loading]="isLoading()" animate.leave="fade">
       <img
         [src]="hour.icon ? '/assets/images/icon-' + hour.icon + '.webp' : ''"
         alt="{{ hour.alt }}"

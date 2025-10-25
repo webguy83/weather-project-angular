@@ -1,4 +1,3 @@
-
 @use '../../../scss/functions' as *;
 @use '../../../scss/variables' as *;
 @use '../../../scss/animations' as *;
@@ -9,9 +8,9 @@
 }
 
 .hourly-forecast {
-	background: $neutral-800;
-	border-radius: 1.25rem;
-	padding: rem(24px);
+  background: $neutral-800;
+  border-radius: 1.25rem;
+  padding: rem(24px);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -23,120 +22,130 @@
   }
 }
 .hourly-forecast-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin-bottom: rem(16px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: rem(16px);
 }
 .hourly-forecast-title {
   font-family: $font-primary;
-	font-size: rem(20px);
-	font-weight: 600;
-	color: $neutral-0;
+  font-size: rem(20px);
+  font-weight: 600;
+  color: $neutral-0;
 }
 
 .hourly-forecast-day-selector {
-	background: $neutral-700;
-	color: $neutral-0;
-	border: none;
-	border-radius: rem(12px);
-	padding: rem(8px) rem(16px);
-	font-weight: 500;
-	font-size: rem(16px);
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	gap: rem(8px);
-	transition: background-color 0.2s;
+  background: $neutral-700;
+  color: $neutral-0;
+  border: none;
+  border-radius: rem(12px);
+  padding: rem(8px) rem(16px);
+  font-weight: 500;
+  font-size: rem(16px);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: rem(8px);
+  transition: background-color 0.2s;
 
-	&:hover {
-		background: $neutral-600;
-	}
+  &:hover {
+    background: $neutral-600;
+  }
 
-	&:focus-visible {
-		outline: 1px solid $neutral-0;
-		outline-offset: 2px;
-	}
+  &:focus-visible {
+    outline: 1px solid $neutral-0;
+    outline-offset: 2px;
+  }
 }
 
 .hourly-forecast-day-menu {
-	background-color: $neutral-800;
-	border: 1px solid $neutral-600;
-	border-radius: rem(12px);
-	padding: rem(8px);
-	margin-top: rem(4px);
-	overflow-y: auto;
-	box-sizing: border-box;
+  background-color: $neutral-800;
+  border: 1px solid $neutral-600;
+  border-radius: rem(12px);
+  padding: rem(8px);
+  margin-top: rem(4px);
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .day-menu-item {
-	display: block;
-	width: 100%;
-	padding: rem(12px) rem(16px);
-	color: $neutral-0;
-	background: transparent;
-	border: 1px solid transparent;
-	border-radius: rem(8px);
-	text-align: left;
-	font-size: rem(16px);
-	margin-bottom: rem(4px);
-	transition: background-color 0.2s, border-color 0.2s;
-	cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: rem(12px) rem(16px);
+  color: $neutral-0;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: rem(8px);
+  text-align: left;
+  font-size: rem(16px);
+  margin-bottom: rem(4px);
+  transition: background-color 0.2s, border-color 0.2s;
+  cursor: pointer;
 
-	&:hover {
-		background-color: $neutral-700;
-		border: 1px solid $neutral-600;
-	}
+  &:hover {
+    background-color: $neutral-700;
+    border: 1px solid $neutral-600;
+  }
 
-	&.selected {
-		background-color: $neutral-700;
-		border: 1px solid $neutral-600;
-	}
+  &.selected {
+    background-color: $neutral-700;
+    border: 1px solid $neutral-600;
+  }
 
-	&:focus-visible {
-		outline: 1px solid $neutral-0;
-		outline-offset: 2px;
-	}
+  &:focus-visible {
+    outline: 1px solid $neutral-0;
+    outline-offset: 2px;
+  }
 
-	&:last-child {
-		margin-bottom: 0;
-	}
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 .hourly-forecast-list {
   flex: 1 1 auto;
-	list-style: none;
-	padding: 0;
-	margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: rem(16px);
 }
 .hourly-forecast-item {
-	background: $neutral-700;
-	border: 1px solid $neutral-600;
-	border-radius: rem(8px);
-	padding: rem(8px) rem(16px);
-	display: flex;
-	align-items: center;
-	gap: 1rem;
+  background: $neutral-700;
+  border: 1px solid $neutral-600;
+  border-radius: rem(8px);
+  padding: rem(8px) rem(16px);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition-property: opacity, transform;
+  transition-duration: 500ms;
 
-	&.loading {
-		animation: pulse 2s ease-in-out infinite;
+  &.fade {
+    animation: fade-out 500ms;
+  }
 
-    > img, span {
+  @starting-style {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  &.loading {
+    > img,
+    span {
       visibility: hidden;
     }
-	}
+  }
 }
 
 .hourly-time {
-	font-size: rem(20px);
+  font-size: rem(20px);
   font-weight: 500;
-	color: $neutral-0;
-	flex: 1;
+  color: $neutral-0;
+  flex: 1;
 }
 .hourly-temp {
-	font-size: rem(16px);
-	font-weight: 500;
-	color: $neutral-0;
+  font-size: rem(16px);
+  font-weight: 500;
+  color: $neutral-0;
 }

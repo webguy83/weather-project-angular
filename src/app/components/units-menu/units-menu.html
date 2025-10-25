@@ -11,7 +11,7 @@
   </span>
 </button>
 <ng-template #menu>
-  <div class="custom-units-menu" cdkMenu>
+  <div class="custom-units-menu" cdkMenu animate.enter="enter-animation" animate.leave="exit-animation">
     @if (!isMetric()) {
       <button type="button" class="units-menu-item btn" cdkMenuItem (click)="onSwitchToMetric()">
         Switch to Metric

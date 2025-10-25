@@ -1,5 +1,6 @@
 @use '../../../scss/functions' as *;
 @use '../../../scss/variables' as *;
+@use '../../../scss/animations' as *;
 
 // Custom styles for Angular Material menu
 
@@ -67,4 +68,12 @@
 .units-menu-divider {
   margin: rem(6px) 0;
   border: 1px solid $neutral-600;
+}
+
+.enter-animation {
+  animation: slide-fade-in .3s;
+}
+
+.exit-animation {
+  animation: slide-fade-out .3s;
 }
