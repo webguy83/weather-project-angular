@@ -86,31 +86,3 @@ h1, h2, h3, h4, h5, h6 {
   outline: rem(2px) solid $blue-500;
   outline-offset: rem(2px);
 }
-
-// ===================================
-// UTILITY CLASSES
-// ===================================
-
-.container {
-  width: 100%;
-  max-width: rem(1200px);
-  margin: 0 auto;
-  padding-inline: $spacing-md;
-}
-
-.visually-hidden {
-  position: absolute !important;
-  width: rem(1px) !important;
-  height: rem(1px) !important;
-  padding: 0 !important;
-  margin: rem(-1px) !important;
-  overflow: hidden !important;
-  clip: rect(0, 0, 0, 0) !important;
-  white-space: nowrap !important;
-  border: 0 !important;
-}
-
-html, body {
-  min-height: 100vh;
-  height: 100%;
-}

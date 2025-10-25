@@ -9,6 +9,7 @@
   height: 100%;
   padding: rem(24px) rem(16px);
   max-width: rem(1215px);
+  min-width: rem(335px);
   margin: 0 auto;
 }
 
@@ -35,7 +36,7 @@
 }
 
 .exit-animation {
-  animation: slide-fade-out .3s;
+  animation: fade-out .3s;
 }
 
 .app-header {
