@@ -13,6 +13,7 @@
       (input)="onSearchInput($event)"
       (keydown.enter)="onEnterKey($event)"
       [cdkMenuTriggerFor]="searchMenu"
+      [attr.role]="null"
       #searchInput
     />
   </div>
