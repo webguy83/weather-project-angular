@@ -5,17 +5,17 @@
   }
 </header>
 
-@if (hasError()) {
-<app-error-state animate.enter="enter-animation" animate.leave="exit-animation"(retry)="onRetry()"></app-error-state>
-} @else if (hasWeatherData() && !noResultsFound()) {
 <main class="main-content" [class.mobile]="isMobile()" [class.tablet]="isTablet()" animate.enter="enter-animation" animate.leave="exit-animation">
-  <section class="weather-summary">
-    <app-weather-card></app-weather-card>
-    <app-weather-stats></app-weather-stats>
-    <app-daily-forecast></app-daily-forecast>
-  </section>
-  <aside class="weather-hourly">
-    <app-hourly-forecast></app-hourly-forecast>
-  </aside>
+  @if (hasError()) {
+    <app-error-state (retry)="onRetry()"></app-error-state>
+  } @else if (hasWeatherData() && !noResultsFound()) {
+    <section class="weather-summary">
+      <app-weather-card></app-weather-card>
+      <app-weather-stats></app-weather-stats>
+      <app-daily-forecast></app-daily-forecast>
+    </section>
+    <aside class="weather-hourly">
+      <app-hourly-forecast></app-hourly-forecast>
+    </aside>
+  }
 </main>
-}
