@@ -1,4 +1,4 @@
-<section class="hourly-forecast" [class.mobile]="isMobile()">
+<section class="hourly-forecast" [class.mobile]="isMobile()" [class.tablet]="isTablet()">
   <div class="hourly-forecast-header">
     <h3 class="hourly-forecast-title">Hourly forecast</h3>
     <button type="button" class="hourly-forecast-day-selector" [cdkMenuTriggerFor]="dayMenu">

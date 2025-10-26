@@ -37,6 +37,7 @@ export class HourlyForecast {
   private readonly datePipe = inject(DatePipe);
 
   readonly isMobile = this.breakpointService.isXSmall;
+  readonly isTablet = this.breakpointService.isSmall;
   readonly weatherData = this.weatherService.weatherResource.value;
   readonly isLoading = this.weatherService.weatherResource.isLoading;
 
