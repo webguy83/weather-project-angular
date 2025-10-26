@@ -1,7 +1,7 @@
 <form class="search-form" [class.mobile]="isXSmall()" (submit)="onSubmit($event)">
   <div class="search-input-wrapper">
     <span class="search-icon">
-      <img src="../../assets/images/icon-search.svg" alt="" width="24" height="24" />
+  <img src="assets/images/icon-search.svg" alt="" width="24" height="24" />
     </span>
     <input
       type="text"
@@ -23,7 +23,7 @@
       @if (searchResults.status() === 'loading') {
       <div class="search-autocomplete-item search-loading-item">
         <img
-          src="../../assets/images/icon-loading.svg"
+          src="assets/images/icon-loading.svg"
           alt=""
           width="16"
           height="16"

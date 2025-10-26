@@ -25,7 +25,7 @@
     @for (hour of hourlyForecast(); track $index) {
     <li class="hourly-forecast-item" [class.loading]="isLoading()" animate.leave="fade">
       <img
-        [src]="hour.icon ? '/assets/images/icon-' + hour.icon + '.webp' : ''"
+  [src]="hour.icon ? 'assets/images/icon-' + hour.icon + '.webp' : ''"
         alt="{{ hour.alt }}"
         title="{{ hour.alt }}"
         class="hourly-icon"

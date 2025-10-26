@@ -9,7 +9,7 @@
   <div class="weather-loading">
     <div class="loading-spinner">
       <img
-        src="/assets/images/icon-loading.svg"
+  src="assets/images/icon-loading.svg"
         alt=""
         width="130"
         height="130"
@@ -26,7 +26,7 @@
     <div class="weather-main-info">
       <span class="weather-icon">
         <img
-          [src]="'/assets/images/icon-' + weatherIcon().filename + '.webp'"
+          [src]="'assets/images/icon-' + weatherIcon().filename + '.webp'"
           alt=""
           [title]="weatherIcon().description"
           [width]="weatherIcon().filename === 'partly-cloudy-night' || weatherIcon().filename === 'clear-night' ? 80 : 120"
