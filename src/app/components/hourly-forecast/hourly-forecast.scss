@@ -19,6 +19,10 @@
   &.mobile {
     padding: rem(16px);
     min-width: auto;
+
+    .hourly-forecast-list {
+      flex: 1;
+    }
   }
 }
 .hourly-forecast-header {
@@ -102,14 +106,18 @@
   }
 }
 .hourly-forecast-list {
-  flex: 1 1 auto;
+  overflow: auto;
+  flex: 1 1 0;
   list-style: none;
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: column;
   gap: rem(16px);
+  scrollbar-width: thin;
+  scrollbar-color: #39395a $neutral-800;
 }
+
 .hourly-forecast-item {
   background: $neutral-700;
   border: 1px solid $neutral-600;
