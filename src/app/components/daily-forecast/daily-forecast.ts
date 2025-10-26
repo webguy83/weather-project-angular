@@ -47,7 +47,7 @@ export class DailyForecast {
 
       return {
         day: dayName,
-        icon: `/assets/images/icon-${iconData.filename}.webp`,
+        icon: `assets/images/icon-${iconData.filename}.webp`,
         alt: iconData.description,
         high: Math.round(this.unitsService.convertTemperature(daily.temperature2mMax[index])),
         low: Math.round(this.unitsService.convertTemperature(daily.temperature2mMin[index]))

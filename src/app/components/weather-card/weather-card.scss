@@ -8,7 +8,7 @@
     width: 100%;
     min-height: rem(285px);
     border-radius: rem(20px);
-    background-image: url('/assets/images/bg-today-large.png');
+    background-image: url('../../../assets/images/bg-today-large.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -21,7 +21,7 @@
     }
 
     &.mobile {
-      background-image: url('/assets/images/bg-today-small.png');
+      background-image: url('../../../assets/images/bg-today-small.png');
 
       .weather-card-content {
         flex-direction: column;
