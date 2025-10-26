@@ -38,7 +38,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Solution URL: [Solution](https://www.frontendmentor.io/solutions/modern-angular-20-zoneless-weather-app-with-signals-and-minimal-rxjs-yiqpMbphq_)
 - Live Site URL: [App](https://webguy83.github.io/weather-project-angular/)
 
 ## My process
